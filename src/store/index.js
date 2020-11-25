@@ -9,7 +9,10 @@ export default new Vuex.Store({
        bandName: '',
        rate: '',
        netIncome: '',
+       lost: ''
      },
+     initialSalary: 0,
+     insuranceLoss : 0,
       bands: [{
         name: 'Personal Allowance',
         income: [0, 12500],
@@ -29,24 +32,43 @@ export default new Vuex.Store({
   mutations: {
     SET_NET_SALARY(state,payload){
       state.calculatedIncome = payload
+    },
+    SET_INSURANCE_LOSS(state,payload){
+      state.insuranceLoss = payload
+    },
+    SET_INITIAL_SALARY(state,payload){
+      state.initialSalary = payload
     }
   },
   actions: {
-    calculateIncome({commit,state}, payload){
-      commit
+    setInitialSalary({commit},payload){
+      commit('SET_INITIAL_SALARY', payload)
+    },
+    calculateIncome({commit,dispatch,state}, payload){
       let calculatedIncome = {}
       state.bands.forEach(band=> {
+        dispatch('calculateInsurance', payload)
         if(band.income[0] <= payload &&  band.income[1] >= payload){
+          let lost = band.rate == 0 ? payload : payload * ((band.rate)/100)
           let income = band.rate == 0 ? payload : payload * ((100-band.rate)/100)
            calculatedIncome = {
             bandName: band.name,
             rate: band.rate,
-            netIncome: income
+            netIncome: (income - state.insuranceLoss).toFixed(2),
+            lost : lost.toFixed(2)
           }
         }
       })
       commit('SET_NET_SALARY', calculatedIncome)
+    },
+  calculateInsurance({commit}, payload){
+    let weekly = (payload / 12 / 4).toFixed(2)
+    let lost = 0
+    if(weekly > 183){
+      lost =(payload * (13.8/100)).toFixed(2)
     }
+    commit('SET_INSURANCE_LOSS',lost)
+  }
   },
   modules: {
   }

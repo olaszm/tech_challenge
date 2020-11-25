@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="app">
     <Header />
     <div class="main">
       <div class="main__inner wrapper">
@@ -13,7 +13,6 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
 import Header from "@/components/Header";
 import Calculater from "./components/Calculater.vue";
 import ResultDisplay from "./components/ResultDisplay.vue";
@@ -21,21 +20,7 @@ import ResultDisplay from "./components/ResultDisplay.vue";
 export default {
   name: "App",
   data() {
-    return {
-      error: "",
-      userInput: "",
-    };
-  },
-  methods: {
-    ...mapActions(["calculateIncome"]),
-    submitInput() {
-      if (this.userInput) {
-        this.calculateIncome(this.userInput);
-        this.userInput = "";
-      } else {
-        this.error = "Please enter your salary!";
-      }
-    },
+    return {};
   },
 
   components: { Header, Calculater, ResultDisplay },
@@ -46,6 +31,6 @@ export default {
 @import "./styles/main.scss";
 
 .main {
-  padding: 5rem 0;
+  padding: 3rem 0;
 }
 </style>

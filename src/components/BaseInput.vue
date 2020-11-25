@@ -1,6 +1,7 @@
 <template>
   <input
     class="input"
+    :value="value"
     :type="type"
     :placeholder="placeHolder"
     @input="$emit('input', $event.target.value)"
@@ -13,6 +14,7 @@ export default {
     type: {
       required: true,
     },
+    value: {},
     placeHolder: {
       required: true,
       type: String,

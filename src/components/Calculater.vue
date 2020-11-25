@@ -4,6 +4,7 @@
     <div class="inputs">
       <BaseInput
         type="number"
+        :value="userInput"
         placeHolder="Enter gross salary"
         v-model="userInput"
       />
@@ -26,10 +27,11 @@ export default {
     };
   },
   methods: {
-    ...mapActions(["calculateIncome"]),
+    ...mapActions(["calculateIncome", "setInitialSalary"]),
     submitInput() {
       if (this.userInput) {
         this.calculateIncome(this.userInput);
+        this.setInitialSalary(this.userInput);
         this.userInput = "";
       } else {
         this.error = "Please enter your salary!";
