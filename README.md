@@ -1,5 +1,3 @@
-# igloo_energy_challenge
-
 # Simple Vue.js/Vuex Tax Calculator application
 
 ## Project setup
