@@ -20,6 +20,8 @@ button {
   font-weight: bold;
   transition: background 300ms ease;
   cursor: pointer;
+  //   margin: 1rem 0;
+  padding: 0.5em;
 }
 
 .btn {

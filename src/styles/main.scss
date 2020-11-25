@@ -1,7 +1,43 @@
-@import "./normalize";
+// @import "./normalize";
 @import "./variables";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
 html,
 body {
-  background: red;
+  height: 100vh;
+  width: 100%;
+  font-size: 16px;
+}
+
+.wrapper {
+  width: 60%;
+  margin: 0 auto;
+
+  @media (max-width: $desktop) {
+    width: 75%;
+  }
+
+  @media (max-width: $tablet) {
+    width: 90%;
+  }
+
+  @media (max-width: $mobile) {
+    width: 95%;
+  }
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
 }
